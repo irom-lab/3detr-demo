@@ -45,8 +45,8 @@ def main():
 
 
     # Save ply file
-    write_ply_kinect(points, "input_pc_kinect.ply")
-    write_ply_kinect_rgb(points, colors, "input_pc_kinect_rgb.obj")
+    write_ply_kinect(points, "demo_files/input_pc_kinect.ply")
+    write_ply_kinect_rgb(points, colors, "demo_files/input_pc_kinect_rgb.obj")
 
 
     ax.set_xlabel("x")
