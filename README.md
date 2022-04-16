@@ -4,11 +4,11 @@ This repo provides a simple demo of [`3DETR: An End-to-End Transformer Model for
 
 # Installation
 
-Follow the installation directions [[`here`](https://github.com/facebookresearch/3detr)]. 
+Follow the installation directions [`here`](https://github.com/facebookresearch/3detr). 
 
-If you are using the Microsoft Azure Kinect camera, install [[`Azure-Kinect-Sensor-SDK`](https://github.com/microsoft/Azure-Kinect-Sensor-SDK/blob/develop/docs/usage.md)] using the Debian packages (for Linux). In addition, install [[`pyk4a`](https://github.com/etiennedub/pyk4a)].   
+If you are using the Microsoft Azure Kinect camera, install [`Azure-Kinect-Sensor-SDK`](https://github.com/microsoft/Azure-Kinect-Sensor-SDK/blob/develop/docs/usage.md) using the Debian packages (for Linux). In addition, install [`pyk4a`](https://github.com/etiennedub/pyk4a).   
 
-If you are using the Intel RealSense camera, install [[`librealsense`](https://github.com/IntelRealSense/librealsense/blob/master/doc/distribution_linux.md)]. 
+If you are using the Intel RealSense camera, install [`librealsense`](https://github.com/IntelRealSense/librealsense/blob/master/doc/distribution_linux.md). 
 
 # Running the demo
 
@@ -20,7 +20,7 @@ python demo.py --test_ckpt pretrained/sunrgbd_ep1080.pth --nqueries 128 --data_s
 
 ```
 
-The output is saved in ```demo_files/output_bboxes.ply```. You can visualize the input pointcloud (demo_files/input_pc_scannet.ply or demo_files/input_pc_sunrgbd.ply) and output bounding boxes by importing these into [[`MeshLab`](https://www.meshlab.net/)]. 
+The output is saved in ```demo_files/output_bboxes.ply```. You can visualize the input pointcloud (demo_files/input_pc_scannet.ply or demo_files/input_pc_sunrgbd.ply) and output bounding boxes by importing these into [`MeshLab`](https://www.meshlab.net/). 
 
 ## Azure Kinect
 
@@ -36,7 +36,7 @@ python demo.py --test_ckpt pretrained/sunrgbd_ep1080.pth --nqueries 128 --data_s
 
 ```
 
-The output is saved in ```demo_files/output_bboxes.ply```. You can visualize the input pointcloud (demo_files/input_pc_kinect.ply) and output bounding boxes by importing these into [[`MeshLab`](https://www.meshlab.net/)]. 
+The output is saved in ```demo_files/output_bboxes.ply```. You can visualize the input pointcloud (demo_files/input_pc_kinect.ply) and output bounding boxes by importing these into [`MeshLab`](https://www.meshlab.net/). 
 
 
 ## RealSense
@@ -48,4 +48,4 @@ Run the following to generate bounding boxes using 3DETR:
 python demo.py --test_ckpt pretrained/sunrgbd_ep1080.pth --nqueries 128 --data_source realsense
 ```
 
-The output is saved in ```demo_files/output_bboxes.ply```. You can visualize the **transformed** input pointcloud (demo_files/input_pc_realsense_transformed.ply) and output bounding boxes by importing these into [[`MeshLab`](https://www.meshlab.net/)]. 
+The output is saved in ```demo_files/output_bboxes.ply```. You can visualize the **transformed** input pointcloud (demo_files/input_pc_realsense_transformed.ply) and output bounding boxes by importing these into [`MeshLab`](https://www.meshlab.net/). 
