@@ -1,4 +1,4 @@
-# 3DETR Demo: An End-to-End Transformer Model for 3D Object Detection
+# 3DETR Demo
 
 This repo provides a simple demo of [[`3DETR: An End-to-End Transformer Model for 3D Object Detection`](https://github.com/facebookresearch/3detr)]. In particular, given a point cloud obtained from a RealSense or Azure Kinect camera, the code outputs bounding boxes found using 3DETR.
 
