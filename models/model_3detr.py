@@ -204,6 +204,8 @@ class Model3DETR(nn.Module):
             enc_inds = pre_enc_inds
         else:
             # use gather here to ensure that it works for both FPS and random sampling
+            enc_inds = enc_inds.type(torch.int64)
+            pre_enc_inds = pre_enc_inds.type(torch.int64)  
             enc_inds = torch.gather(pre_enc_inds, 1, enc_inds)
         return enc_xyz, enc_features, enc_inds
 
