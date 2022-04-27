@@ -20,7 +20,7 @@ ROOT_DIR = BASE_DIR
 sys.path.append(os.path.join(ROOT_DIR, 'utils'))
 sys.path.append(os.path.join(ROOT_DIR, 'pretrained'))
 from pc_util import random_sampling, write_bbox
-from pc_util_demo import read_ply_realsense, read_ply
+from pc_util_demo import read_ply_realsense, read_ply, write_bbox_ply_from_outputs
 
 
 def make_args_parser():
@@ -151,23 +151,10 @@ if __name__=='__main__':
     print("Infence time: ", t_end - t_start)
 
 
-    # Save bboxes as point cloud (ply)
-    centers = outputs["outputs"]["center_unnormalized"] 
-    centers = centers.cpu().detach().numpy()
-    lengths = outputs["outputs"]["size_unnormalized"]
-    lengths = lengths.cpu().detach().numpy() 
-
-    inds = outputs["outputs"]["objectness_prob"] > 0.5
-    inds = inds.cpu()
-    inds = inds[0,:]
-    centers = centers[:,inds,:]
-    lengths = lengths[:,inds,:]
-
-    scene_bbox = np.concatenate((centers, lengths), 2)
-    scene_bbox = scene_bbox[0,:,:]
-    write_bbox(scene_bbox, "demo_files/output_bboxes.ply")
+    # Write bbox
+    num_objects = write_bbox_ply_from_outputs(outputs, "demo_files/output_bboxes.ply", prob_threshold=0.5)
 
     print(" ")
-    print("Number of objects detected: ", inds.sum().item())
+    print("Number of objects detected: ", num_objects)
     print(" ")
 

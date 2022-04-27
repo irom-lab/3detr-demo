@@ -10,6 +10,7 @@ from plyfile import PlyData, PlyElement
 import trimesh
 
 import matplotlib.pyplot as pyplot
+from pc_util import write_oriented_bbox
 
 def read_ply_realsense(filename):
     """ read XYZ point cloud from filename PLY file from RealSense """
@@ -106,3 +107,40 @@ def point_cloud_to_bbox(points):
     lengths = mx - mn
     cntr = 0.5*(mn + mx)
     return np.concatenate([cntr, lengths], axis=which_dim)
+
+def write_bbox_ply_from_outputs(outputs, out_filename, prob_threshold=0.5):
+    '''
+    Write ply file corresponding to bounding boxes using outputs of 3DETR model.
+    Args:
+        outputs: outputs from 3DETR model.
+        out_filename: name of ply file to write.
+        prob_threshold: probability above which we consider something an object.
+    '''
+
+    # Parse outputs
+    centers = outputs["outputs"]["center_unnormalized"] 
+    centers = centers.cpu().detach().numpy()
+    lengths = outputs["outputs"]["size_unnormalized"]
+    lengths = lengths.cpu().detach().numpy() 
+
+    inds = outputs["outputs"]["objectness_prob"] > prob_threshold
+    inds = inds.cpu()
+    inds = inds[0,:]
+    centers = centers[:,inds,:]
+    lengths = lengths[:,inds,:]
+
+    angles = outputs["outputs"]["angle_continuous"]
+    angles = angles[:,inds]
+    angles = angles.cpu().detach().numpy()
+
+    scene_bbox = np.concatenate((centers, lengths), 2)
+    scene_bbox = scene_bbox[0,:,:]
+
+    scene_bbox = np.concatenate((scene_bbox, angles.T), 1)
+
+    write_oriented_bbox(scene_bbox, out_filename)
+
+    # Number of objects (detected above prob_threshold)
+    num_objects = inds.sum().item()
+
+    return num_objects
