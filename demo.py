@@ -152,7 +152,7 @@ if __name__=='__main__':
 
 
     # Write bbox
-    num_objects = write_bbox_ply_from_outputs(outputs, "demo_files/output_bboxes.ply", prob_threshold=0.5)
+    num_objects = write_bbox_ply_from_outputs(outputs, "demo_files/output_bboxes_" + args.data_source + "_.ply", prob_threshold=0.5)
 
     print(" ")
     print("Number of objects detected: ", num_objects)
